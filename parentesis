@@ -1,0 +1,42 @@
+public class parentesis {
+  Pila pila = new Pila();  
+
+  public static void main (String [] pps) {
+      if (pps.length != 1) {
+	  System.out.println("Forma de uso: java Parentesis expresion");
+      } else {
+	  new Parentesis(pps[0]);
+      }
+  }
+
+    
+  public Parentesis (String linea) {
+      for (int i = 0; i < linea.length(); i++) {
+	  if (linea.charAt(i) == '(') pila.push(new Character(')'));
+	  else if (linea.charAt(i) == '{') pila.push(new Character('}'));
+	  else if (linea.charAt(i) == '[') pila.push(new Character(']'));
+	  else if (linea.charAt(i) == ')') verifica(')');
+	  else if (linea.charAt(i) == '}') verifica('}');
+	  else if (linea.charAt(i) == ']') verifica(']');
+      }
+
+      if (pila.estaVacia())
+	  System.out.println("Parentesis balanceados");
+      else 
+	  System.out.println("Parentesis NO balanceados");	  
+  }
+
+    
+  private void verifica (char c) {
+      if (pila.estaVacia()) {
+	  System.out.println("Parentesis NO balanceados"); 
+	  System.exit(0); 
+      } else {
+	  Character s = (Character) pila.pop();  
+	  if (c != s.charValue()) {
+	      System.out.println("Parentesis NO balanceados"); 
+	      System.exit(0); 
+	  }
+      }
+  }
+}
